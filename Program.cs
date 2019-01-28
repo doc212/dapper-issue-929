@@ -10,10 +10,10 @@ namespace dapper_issue_929
         {
             try
             {
-                string _CONN_STRING = "User=root;Pwd=pass";
+                string _CONN_STRING = "User=root;Pwd=pass;Database=test";
                 using (var connection = new MySql.Data.MySqlClient.MySqlConnection(_CONN_STRING))
                 {
-                    var query = "SELECT * FROM test.Item WHERE Id=2005";
+                    var query = "SELECT * FROM Item WHERE Id=2005";
                     var item = connection.Query<Item>(query).First();
                     var json = Newtonsoft.Json.JsonConvert.SerializeObject(item, Newtonsoft.Json.Formatting.Indented);
                     Console.WriteLine(json);
@@ -31,5 +31,6 @@ namespace dapper_issue_929
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string[] Keywords {get; set;}
     }
 }
