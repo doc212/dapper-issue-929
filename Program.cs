@@ -30,5 +30,6 @@ namespace dapper_issue_929
     class Item
     {
         public string Id { get; set; }
+        public string Name { get; set; }
     }
 }
