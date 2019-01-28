@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.5" />
     <PackageReference Include="MySQL.Data" Version="8.0.14" />
+    <PackageReference Include="Newtonsoft.json" Version="12.0.1" />
   </ItemGroup>
 
 </Project>
