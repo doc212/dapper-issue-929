@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Dapper;
@@ -46,21 +47,28 @@ namespace dapper_issue_929
         }
     }
 
+    class KeywordsList : List<string>
+    {
+
+    }
+
     class Item
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string[] Keywords {get; set;}
+        public KeywordsList Keywords {get; set;}
     }
 
-    class KeywordsHandler : SqlMapper.TypeHandler<string[]>
+    class KeywordsHandler : SqlMapper.TypeHandler<KeywordsList>
     {
-        public override string[] Parse(object value)
+        public override KeywordsList Parse(object value)
         {
-            return value.ToString().Split(",").ToArray();
+            var result = new KeywordsList();
+            result.AddRange(value.ToString().Split(","));
+            return result;
         }
 
-        public override void SetValue(IDbDataParameter parameter, string[] value)
+        public override void SetValue(IDbDataParameter parameter, KeywordsList value)
         {
             throw new NotImplementedException();
         }
